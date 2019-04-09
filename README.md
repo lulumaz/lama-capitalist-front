@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## Note global
+Les images sont dans /src/assets/images
+## Note CSS
+
+Les balises <row> peuvent contenir d’autres balises <row> qui reprennent alors la numérotation des colonnes à zéro. Ce système permet à chaque cellule de pouvoir présenter une mise en page autonome.
