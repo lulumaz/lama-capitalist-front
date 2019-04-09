@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Lama Capitalist Project';
   auteurs= ["@Lucas Mazel","@Kelig NOËL"]
+  cryptolama= 2000000000;
 }
