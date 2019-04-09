@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'lama-capitalist-front';
+  title = 'Lama Capitalist Project';
+  auteurs= ["@Lucas Mazel","@Kelig NOËL"]
 }
