@@ -2,6 +2,7 @@
   <div style="text-align:center">
     <h1>
       Bienvenue sur le jeu {{ title }}!
+
     </h1>
     <img width="300" alt="Lama Logo" src="/assets/images/lamaMenu.jpg">
   </div>
@@ -18,4 +19,17 @@
       <div class="col-md-10">Partie droite with items</div>
     </div>
   </div>
+
+
+<!-- Code du prof plus important -->
+<p>Je suis le nom de monde</p>
+<span id="worldname"> {{world.name}} </span>
+<span id="worldMoney"> {{world.money}} </span>
+<span><img [attr.src]="server+world.logo" /> </span>
+
+<p>Le premier porduit</p>
+
+<app-product [prod]="world.products.product[1]"
+class="product col-md-6"></app-product>
+
 </body>
