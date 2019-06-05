@@ -29,7 +29,11 @@
 
 <p>Le premier porduit</p>
 
-<app-product [prod]="world.products.product[1]"
-class="product col-md-6"></app-product>
+<app-product *ngIf="world.products.product[1]" [prod]="world.products.product[1]" class="product col-md-6"></app-product> 
+<!-- Le ng if pourra auter lors du ngfor -->
 
+<p>Les pipes</p>
+
+<span [innerHTML]="world.money | bigvalue"> </span>
+<p>{{ world.money | bigvalue }}</p>
 </body>

@@ -17,7 +17,7 @@ export class AppComponent {
 
 
   constructor(private service: RestserviceService) {
-  //this.server = service.getServer();
+  this.server = service.getServer();
   service.getWorld().then(world => {
     this.world = world;
     });
