@@ -31,6 +31,7 @@ export class ProductComponent implements OnInit {
   server: string;
   progress = 0.5;
   lastupdate: number;
+  working = false;
 
   set prod(value: Product) {
     this.product = value;
@@ -53,6 +54,7 @@ export class ProductComponent implements OnInit {
     this.product.timeleft = this.product.vitesse;
     this.lastupdate = Date.now();
     this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
+    this.working = true;
   }
 
   calcScore() {
@@ -60,12 +62,13 @@ export class ProductComponent implements OnInit {
       this.product.timeleft =
         this.product.timeleft - (Date.now() - this.lastupdate);
       this.lastupdate = Date.now();
-    } else if (this.product.timeleft < 0) {
+    } else if (this.working) {
       console.log("Le produit est créé");
       this.progressbar.set(0);
       this.product.timeleft = 0;
       // on prévient le composant parent que ce produit a généré son revenu.
       this.notifyProduction.emit(this.product);
+      this.working = false;
     }
   }
 }
