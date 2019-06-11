@@ -27,11 +27,22 @@ export class ProductComponent implements OnInit {
 
   @Input("prod")
   product: Product;
+
+  @Input("money")
+  money: number;
+
+  _multSelected: string;
+  @Input()
+  set multSelected(value: string) {
+    this._multSelected = value;
+    if (this._multSelected && this.product) this.calcMaxCanBuy();
+  }
   progressbar: any;
   server: string;
   progress = 0.5;
   lastupdate: number;
   working = false;
+  buyable: number;
 
   set prod(value: Product) {
     this.product = value;
@@ -55,6 +66,27 @@ export class ProductComponent implements OnInit {
     this.lastupdate = Date.now();
     this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
     this.working = true;
+  }
+
+  calcMaxCanBuy() {
+    let cout = this.product.cout;
+    let calc = Math.floor(
+      Math.log(
+        1 +
+          (this.product.croissance * this.money - this.money) /
+            this.product.cout
+      ) / Math.log(this.product.croissance)
+    );
+    if (this._multSelected != "Max") {
+      let x = parseInt(this._multSelected);
+      if (calc > x) {
+        this.buyable = x;
+      } else {
+        this.buyable = calc;
+      }
+    } else {
+      this.buyable = calc;
+    }
   }
 
   calcScore() {

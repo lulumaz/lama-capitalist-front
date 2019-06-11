@@ -1,39 +1,50 @@
-<body>
-  <div style="text-align:center">
-    <h1>
-      Bienvenue sur le jeu {{ title }}!
+<div style="text-align:center">
+  <h1>Bienvenue sur le jeu {{ title }}!</h1>
+  <img width="300" alt="Lama Logo" src="/assets/images/lamaMenu.jpg" />
+</div>
+<p>Ce projet est copiright par {{ auteurs[0] }} et {{ auteurs[1] }}</p>
 
-    </h1>
-    <img width="300" alt="Lama Logo" src="/assets/images/lamaMenu.jpg">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4">Le super monde des Lamas</div>
+    <div class="col-md-4">Vous avez {{ cryptolama }} cryptolama</div>
+    <div class="col-md-4">Zone d'achat</div>
   </div>
-  <p>Ce projet est copiright par {{auteurs[0]}} et {{auteurs[1]}}</p>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4">Le super monde des Lamas</div>
-      <div class="col-md-4">Vous avez {{cryptolama}} cryptolama </div>
-      <div class="col-md-4">Zone d'achat</div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">Partie Gauche avec le menu</div>
-      <div class="col-md-10">Partie droite with items</div>
-    </div>
+  <div class="row">
+    <div class="col-md-2">Partie Gauche avec le menu</div>
+    <div class="col-md-10">Partie droite with items</div>
   </div>
-
+</div>
 
 <!-- Code du prof plus important -->
-<p>Je suis le nom de monde</p>
-<span id="worldname"> {{world.name}} </span>
-<span id="worldMoney"> {{world.money}} </span>
-<span><img [attr.src]="server+world.logo" /> </span>
+<span id="worldname"> {{ world.name }} </span>
+<span id="worldMoney"> {{ world.money }} </span>
+<span><img [attr.src]="server + world.logo" /> </span>
+<span
+  ><button
+    type="button"
+    class="btn btn-primary"
+    (click)="onMultChange(multSelected)"
+  >
+    Acheter par {{ multSelected }}
+  </button></span
+>
 
-<p>Le premier porduit</p>
+<br />
 
-<app-product *ngIf="world.products.product[1]" [prod]="world.products.product[1]" class="product col-md-6" (notifyProduction)="onProductionDone($event)"></app-product> 
+<app-product
+  *ngIf="world.products.product[0]"
+  [prod]="world.products.product[0]"
+  class="product"
+  (notifyProduction)="onProductionDone($event)"
+  [multSelected]="multSelected"
+  [money]="world.money"
+></app-product>
 <!-- Le ng if pourra auter lors du ngfor -->
+
+<br />
 
 <p>Les pipes</p>
 
 <span [innerHTML]="world.money | bigvalue"> </span>
 <p>{{ world.money | bigvalue }}</p>
-</body>
