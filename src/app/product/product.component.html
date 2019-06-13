@@ -24,7 +24,15 @@
           <div class="row">
             <div class="col-sm-8 container">
               <div class="row">
-                <div class="col-sm-2">achat</div>
+                <div class="col-sm-2">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onBuy(buyable)"
+                  >
+                    achat
+                  </button>
+                </div>
                 <div class="col-sm-6"></div>
                 <div class="col-sm-2">{{ buyable }}</div>
                 <div class="col-sm-2">coût</div>

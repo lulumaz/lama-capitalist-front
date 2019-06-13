@@ -36,4 +36,8 @@ export class AppComponent {
       this.multSelected = this.mult[0];
     }
   }
+
+  onProductBuy(cost: number) {
+    this.world.money = this.world.money - cost;
+  }
 }

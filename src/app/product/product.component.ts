@@ -22,6 +22,8 @@ export class ProductComponent implements OnInit {
     Product
   >();
 
+  @Output() notifyProductBuy: EventEmitter<number> = new EventEmitter<number>();
+
   @ViewChild("bar")
   progressBarItem;
 
@@ -62,14 +64,16 @@ export class ProductComponent implements OnInit {
     }, 100);
   }
   startFabrication() {
-    this.product.timeleft = this.product.vitesse;
-    this.lastupdate = Date.now();
-    this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
-    this.working = true;
+    if (this.working == false) {
+      this.product.timeleft = this.product.vitesse;
+      this.lastupdate = Date.now();
+      this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
+      this.working = true;
+    }
   }
 
   calcMaxCanBuy() {
-    let cout = this.product.cout;
+    //todo revoir la formule
     let calc = Math.floor(
       Math.log(
         1 +
@@ -95,12 +99,23 @@ export class ProductComponent implements OnInit {
         this.product.timeleft - (Date.now() - this.lastupdate);
       this.lastupdate = Date.now();
     } else if (this.working) {
-      console.log("Le produit est créé");
       this.progressbar.set(0);
       this.product.timeleft = 0;
       // on prévient le composant parent que ce produit a généré son revenu.
       this.notifyProduction.emit(this.product);
       this.working = false;
     }
+  }
+
+  onBuy(quantity: number) {
+    let { cout, croissance, quantite } = this.product;
+    let totalQuantity = quantity + quantite;
+    let cost =
+      cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance));
+    if (cost < this.money) {
+      this.product.quantite = totalQuantity;
+      this.notifyProductBuy.emit(cost);
+    }
+    this.calcMaxCanBuy();
   }
 }

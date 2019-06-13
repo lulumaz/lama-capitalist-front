@@ -37,6 +37,7 @@
   [prod]="world.products.product[0]"
   class="product"
   (notifyProduction)="onProductionDone($event)"
+  (notifyProductBuy)="onProductBuy($event)"
   [multSelected]="multSelected"
   [money]="world.money"
 ></app-product>
