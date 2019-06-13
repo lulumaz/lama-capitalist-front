@@ -68,6 +68,8 @@ export class ProductComponent implements OnInit {
       this.product.timeleft = this.product.vitesse;
       this.lastupdate = Date.now();
       this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
+
+      this.service.putProduct(this.product);
       this.working = true;
     }
   }
@@ -115,6 +117,7 @@ export class ProductComponent implements OnInit {
     if (cost < this.money) {
       this.product.quantite = totalQuantity;
       this.notifyProductBuy.emit(cost);
+      this.service.putProduct(this.product);
     }
     this.calcMaxCanBuy();
   }

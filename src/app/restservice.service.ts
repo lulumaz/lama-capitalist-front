@@ -8,7 +8,7 @@ import { World, Pallier, Product } from "./word";
 export class RestserviceService {
   server = "http://localhost:8080/";
   adeventureisis = "adventureisis/";
-  user = "";
+  user = "tototata";
 
   constructor(private http: HttpClient) {}
   private handleError(error: any): Promise<any> {
@@ -16,14 +16,39 @@ export class RestserviceService {
     return Promise.reject(error.message || error);
   }
 
+  private setHeaders(
+    user: string
+  ): {
+    [header: string]: string | string[];
+  } {
+    return { "X-User": user };
+  }
+
   public getWorld(): Promise<World> {
     return this.http
-      .get(this.server + this.adeventureisis + "generic/world")
+      .get(this.server + this.adeventureisis + "generic/world", {
+        headers: this.setHeaders(this.user)
+      })
       .toPromise()
       .catch(this.handleError);
   }
 
   public getServer() {
     return this.server;
+  }
+  public putManager(manager: Pallier): Promise<any> {
+    return this.http
+      .put(this.server + this.adeventureisis + "generic/manager", manager, {
+        headers: this.setHeaders(this.user)
+      })
+      .toPromise();
+  }
+
+  public putProduct(product: Product): Promise<any> {
+    return this.http
+      .put(this.server + this.adeventureisis + "generic/product", product, {
+        headers: this.setHeaders(this.user)
+      })
+      .toPromise();
   }
 }
