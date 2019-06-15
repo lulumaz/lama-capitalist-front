@@ -1,18 +1,33 @@
-<div style="text-align:center">
-  <h1 class="title">
-    <span>Bienvenue sur {{ title }}</span>
-  </h1>
-  <img
-    width="150"
-    height="150"
-    alt="Lama Logo"
-    [attr.src]="server + world.logo"
-  />
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <img
+        width="150"
+        height="150"
+        alt="Lama Logo"
+        [attr.src]="server + world.logo"
+      />
+    </div>
+    <div class="col-md-10">
+      <h1 class="title">
+        <span>{{ world.name }}</span>
+      </h1>
+    </div>
+  </div>
 </div>
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4 ">{{ world.name }}</div>
+    <div class="col-md-4 ">
+      <input
+        class="form-control"
+        placeholder="Username"
+        aria-label="Username"
+        type="text"
+        [(ngModel)]="username"
+        (change)="onUsernameChanged(username)"
+      />
+    </div>
     <div class="col-md-4 ">
       <span id="worldMoney">{{ world.money | bigvalue }} Cryptolama </span>
     </div>

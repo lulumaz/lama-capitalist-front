@@ -15,6 +15,7 @@ export class AppComponent {
   server: string;
   mult: string[] = ["1", "10", "100", "Max"];
   multSelected: string = this.mult[0];
+  username: string = "";
 
   constructor(private service: RestserviceService) {
     this.server = service.getServer();
@@ -39,5 +40,11 @@ export class AppComponent {
 
   onProductBuy(cost: number) {
     this.world.money = this.world.money - cost;
+  }
+  onUsernameChanged(username: string) {
+    this.service.setUser(username);
+    this.service.getWorld().then(world => {
+      this.world = world;
+    });
   }
 }
