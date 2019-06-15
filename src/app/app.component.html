@@ -1,51 +1,55 @@
 <div style="text-align:center">
-  <h1>Bienvenue sur le jeu {{ title }}!</h1>
-  <img width="300" alt="Lama Logo" src="/assets/images/lamaMenu.jpg" />
+  <h1 class="title">
+    <span>Bienvenue sur {{ title }}</span>
+  </h1>
+  <img
+    width="150"
+    height="150"
+    alt="Lama Logo"
+    [attr.src]="server + world.logo"
+  />
 </div>
-<p>Ce projet est copiright par {{ auteurs[0] }} et {{ auteurs[1] }}</p>
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">Le super monde des Lamas</div>
-    <div class="col-md-4">Vous avez {{ cryptolama }} cryptolama</div>
-    <div class="col-md-4">Zone d'achat</div>
+    <div class="col-md-4 ">{{ world.name }}</div>
+    <div class="col-md-4 ">
+      <span id="worldMoney">{{ world.money | bigvalue }} Cryptolama </span>
+    </div>
+    <div class="col-md-4">
+      <div class="button_cont" style="text-align: center">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onMultChange(multSelected)"
+        >
+          Acheter par {{ multSelected }}
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="row">
-    <div class="col-md-2">Partie Gauche avec le menu</div>
-    <div class="col-md-10">Partie droite with items</div>
+  <div class="row ">
+    <div class="col-md-2">
+      <div class="navbar navbar-inverse navbar-fixed-left">
+        <a class="navbar-brand" href="#">Manager</a>
+        <ul class="nav navbar-nav">
+          <!-- Ng for des managers -->
+        </ul>
+        <a class="navbar-brand" href="#">Ange</a>
+        <a class="navbar-brand" href="#">Pallier</a>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <!-- Ng for with items -->
+      <app-product
+        *ngIf="world.products.product[0]"
+        [prod]="world.products.product[0]"
+        class="product"
+        (notifyProduction)="onProductionDone($event)"
+        (notifyProductBuy)="onProductBuy($event)"
+        [multSelected]="multSelected"
+        [money]="world.money"
+      ></app-product>
+    </div>
   </div>
 </div>
-
-<!-- Code du prof plus important -->
-<span id="worldname"> {{ world.name }} </span>
-<span id="worldMoney"> {{ world.money }} </span>
-<span><img [attr.src]="server + world.logo" /> </span>
-<span
-  ><button
-    type="button"
-    class="btn btn-primary"
-    (click)="onMultChange(multSelected)"
-  >
-    Acheter par {{ multSelected }}
-  </button></span
->
-
-<br />
-
-<app-product
-  *ngIf="world.products.product[0]"
-  [prod]="world.products.product[0]"
-  class="product"
-  (notifyProduction)="onProductionDone($event)"
-  (notifyProductBuy)="onProductBuy($event)"
-  [multSelected]="multSelected"
-  [money]="world.money"
-></app-product>
-<!-- Le ng if pourra auter lors du ngfor -->
-
-<br />
-
-<p>Les pipes</p>
-
-<span [innerHTML]="world.money | bigvalue"> </span>
-<p>{{ world.money | bigvalue }}</p>
