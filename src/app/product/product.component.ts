@@ -11,11 +11,13 @@ import { RestserviceService } from "../restservice.service";
 
 declare var require;
 const ProgressBar = require("progressbar.js");
+//var randomColor = Math.floor(Math.random()*16777215).toString(16);
 
 @Component({
   selector: "app-product",
   templateUrl: "./product.component.html",
   styleUrls: ["./product.component.css"]
+  
 })
 export class ProductComponent implements OnInit {
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<
