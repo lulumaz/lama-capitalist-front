@@ -9,7 +9,7 @@ import { World, Product, Pallier } from './word';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Lama Capitalist Project';
+  title = 'Lama Capitalist';
   auteurs= ["@Lucas Mazel","@Kelig NOËL"]
   cryptolama= 2000000000;
   world: World = new World();
