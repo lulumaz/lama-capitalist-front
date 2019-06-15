@@ -8,9 +8,7 @@ import { World, Product, Pallier } from "./word";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "Lama Capitalist";
-  auteurs = ["@Lucas Mazel", "@Kelig NOËL"];
-  cryptolama = 2000000000;
+
   world: World = new World();
   server: string;
   mult: string[] = ["1", "10", "100", "Max"];
