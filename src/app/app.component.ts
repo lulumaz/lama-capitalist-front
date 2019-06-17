@@ -21,6 +21,7 @@ export class AppComponent {
     this.server = service.getServer();
     service.getWorld().then(world => {
       this.world = world;
+      console.log(world);
     });
   }
 
@@ -46,5 +47,14 @@ export class AppComponent {
     this.service.getWorld().then(world => {
       this.world = world;
     });
+  }
+
+  onBuyManager(manager: Pallier) {
+    if (manager.seuil <= this.world.money) {
+      manager.unlocked = true;
+      this.service.putManager(manager);
+      this.world.money -= manager.seuil;
+      this.world.products.product[manager.idcible].managerUnlocked = true;
+    }
   }
 }

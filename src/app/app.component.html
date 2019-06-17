@@ -46,7 +46,14 @@
   <div class="row ">
     <div class="col-md-2">
       <div class="navbar navbar-inverse navbar-fixed-left">
-        <a class="navbar-brand" href="#">Manager</a>
+        <a
+          class="navbar-brand"
+          href="#"
+          data-toggle="modal"
+          (click)="managersModal.show()"
+          >Manager</a
+        >
+
         <ul class="nav navbar-nav">
           <!-- Ng for des managers -->
         </ul>
@@ -68,3 +75,59 @@
     </div>
   </div>
 </div>
+
+<app-modal #managersModal>
+  <div class="app-modal-header">
+    <h4 class="modal-title">Managers make you feel better !</h4>
+  </div>
+  <div class="app-modal-body">
+    <div *ngFor="let manager of world.managers.pallier">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <img
+              [src]="server + manager.logo"
+              alt=""
+              style="width:120px; height:120px;"
+            />
+          </div>
+          <div class="col-md-9">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  {{ manager.name }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">{{ manager.seuil }} Cryptolama</div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <button
+                    *ngIf="!manager.unlocked"
+                    [disabled]="world.money < manager.seuil"
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onBuyManager(manager)"
+                  >
+                    Hire
+                  </button>
+                  <div *ngIf="manager.unlocked">UnLocked !</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button
+      type="button"
+      class="btn btn-default"
+      (click)="managersModal.hide()"
+    >
+      Close
+    </button>
+  </div>
+</app-modal>
