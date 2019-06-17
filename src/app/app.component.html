@@ -44,7 +44,7 @@
     </div>
   </div>
   <div class="row ">
-    <div class="col-md-2">
+    <div class="col-md-1">
       <div class="navbar navbar-inverse navbar-fixed-left">
         <a
           class="navbar-brand"
@@ -61,17 +61,84 @@
         <a class="navbar-brand" href="#">Pallier</a>
       </div>
     </div>
-    <div class="col-md-10">
-      <!-- Ng for with items -->
-      <app-product
-        *ngIf="world.products.product[0]"
-        [prod]="world.products.product[0]"
-        class="product"
-        (notifyProduction)="onProductionDone($event)"
-        (notifyProductBuy)="onProductBuy($event)"
-        [multSelected]="multSelected"
-        [money]="world.money"
-      ></app-product>
+    <div class="col-md-11">
+      <div class="container" style="width: 100%">
+        <div class="row">
+          <div class="col-md-6">      
+            <app-product
+            *ngIf="world.products.product[0]"
+            [prod]="world.products.product[0]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+          </div>
+          <div class="col-md-6">
+              <app-product
+              *ngIf="world.products.product[1]"
+              [prod]="world.products.product[1]"
+              class="product"
+              (notifyProduction)="onProductionDone($event)"
+              (notifyProductBuy)="onProductBuy($event)"
+              [multSelected]="multSelected"
+              [money]="world.money"
+            ></app-product>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <app-product
+                *ngIf="world.products.product[2]"
+                [prod]="world.products.product[2]"
+                class="product"
+                (notifyProduction)="onProductionDone($event)"
+                (notifyProductBuy)="onProductBuy($event)"
+                [multSelected]="multSelected"
+                [money]="world.money"
+              ></app-product>
+  
+            </div>
+            <div class="col-md-6">
+                <app-product
+                *ngIf="world.products.product[3]"
+                [prod]="world.products.product[3]"
+                class="product"
+                (notifyProduction)="onProductionDone($event)"
+                (notifyProductBuy)="onProductBuy($event)"
+                [multSelected]="multSelected"
+                [money]="world.money"
+              ></app-product>
+              
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <app-product
+                  *ngIf="world.products.product[4]"
+                  [prod]="world.products.product[4]"
+                  class="product"
+                  (notifyProduction)="onProductionDone($event)"
+                  (notifyProductBuy)="onProductBuy($event)"
+                  [multSelected]="multSelected"
+                  [money]="world.money"
+                ></app-product>
+    
+              </div>
+              <div class="col-md-6">
+                  <app-product
+                  *ngIf="world.products.product[5]"
+                  [prod]="world.products.product[5]"
+                  class="product"
+                  (notifyProduction)="onProductionDone($event)"
+                  (notifyProductBuy)="onProductBuy($event)"
+                  [multSelected]="multSelected"
+                  [money]="world.money"
+                ></app-product>
+              </div>
+            </div>
+      </div>
     </div>
   </div>
 </div>

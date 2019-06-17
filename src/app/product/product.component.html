@@ -10,40 +10,31 @@
     </div>
     <div class="col-sm-8 container">
       <div class="row">
-        <div class="col">
-          <span id="productName"> {{ product.name }} </span>
-        </div>
+        {{product.name}}
       </div>
+      <!-- progress bar-->
       <div class="row">
         <div class="col">
           <div class="progress" #bar></div>
         </div>
       </div>
+      <!-- Ligne avec info achat-->
       <div class="row">
-        <div class="col container">
-          <div class="row">
-            <div class="col-sm-8 container">
-              <div class="row">
-                <div class="col-sm-2">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    (click)="onBuy(buyable)"
-                  >
-                    achat
-                  </button>
-                </div>
-                <div class="col-sm-6"></div>
-                <div class="col-sm-2">{{ buyable }}</div>
-                <div class="col-sm-2">coût</div>
+        <div class="container" style="width: 100%">
+            <div class="row">
+              <div class="col-sm-3">
+                <button
+                  type="button"
+                  class="btn-gradient green small"
+                  (click)="onBuy(buyable)"
+                >
+                Acheter
+                </button>
               </div>
+              <div class="col-sm-3"></div>
+              <div class="col-sm-3">{{ buyable }} lama disponible</div>
+              <div class="col-sm-3">Cryptolama</div>
             </div>
-            <div class="col-sm-4">
-              <div class="row">
-                <div class="col">temps</div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

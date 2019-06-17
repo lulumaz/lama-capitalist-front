@@ -6,9 +6,9 @@ import { World, Pallier, Product } from "./word";
   providedIn: "root"
 })
 export class RestserviceService {
-  server = "http://localhost:8080/";
+  server = "http://192.168.1.32:8080/";
   adeventureisis = "adventureisis/";
-  user = "keligClone3";
+  user = "keligClone4";
 
   constructor(private http: HttpClient) {}
   private handleError(error: any): Promise<any> {
