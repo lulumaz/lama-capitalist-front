@@ -17,9 +17,11 @@ const ProgressBar = require("progressbar.js");
   selector: "app-product",
   templateUrl: "./product.component.html",
   styleUrls: ["./product.component.css"]
-  
 })
 export class ProductComponent implements OnInit {
+  //todo : ne pas pouvoir lancer la production si on a pas le lama
+  //todo : handle le Nan cryptolama
+
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<
     Product
   >();

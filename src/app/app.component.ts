@@ -8,7 +8,6 @@ import { World, Product, Pallier } from "./word";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-
   world: World = new World();
   server: string;
   mult: string[] = ["1", "10", "100", "Max"];
@@ -44,6 +43,7 @@ export class AppComponent {
     this.service.setUser(username);
     this.service.getWorld().then(world => {
       this.world = world;
+      console.log(world);
     });
   }
 

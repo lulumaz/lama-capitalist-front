@@ -7,6 +7,7 @@ import { Pallier } from "../word";
   styleUrls: ["./modal.component.css"]
 })
 export class ModalComponent implements OnInit {
+  //todo : scroll bar
   constructor() {}
 
   ngOnInit() {}
