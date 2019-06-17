@@ -11,5 +11,12 @@
     text-shadow: 0 1px 0 rgba(0,0,0,0.15);
 }
 .container-fluid{  
-    border: 4px solid  indianred !important;
+    
+}
+.title{
+    font-size: medium;
+    font-family: Gill Sans, Verdana;
+}
+.level{
+    text-align: right;
 }
