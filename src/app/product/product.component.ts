@@ -19,8 +19,6 @@ const ProgressBar = require("progressbar.js");
   styleUrls: ["./product.component.css"]
 })
 export class ProductComponent implements OnInit {
-  //todo : ne pas pouvoir lancer la production si on a pas le lama
-  //todo : handle le Nan cryptolama
 
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<
     Product
@@ -65,10 +63,11 @@ export class ProductComponent implements OnInit {
     );
     setInterval(() => {
       this.calcScore();
+      this.calcMaxCanBuy();
     }, 100);
   }
   startFabrication() {
-    if (this.working == false) {
+    if (this.working == false && this.product.quantite>0) {
       this.product.timeleft = this.product.vitesse;
       this.lastupdate = Date.now();
       this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
@@ -84,19 +83,20 @@ export class ProductComponent implements OnInit {
     let calc = Math.floor(
       Math.log(
         1 +
-          (this.product.croissance * this.money - this.money) /
-            this.product.cout
+         ( (this.product.croissance * this.money - this.money) /
+            this.product.cout )
       ) / Math.log(this.product.croissance)
     );
+    let nb = Math.trunc(calc);
     if (this._multSelected != "Max") {
       let x = parseInt(this._multSelected);
-      if (calc > x) {
+      if (nb > x) {
         this.buyable = x;
       } else {
-        this.buyable = calc;
+        this.buyable = nb;
       }
     } else {
-      this.buyable = calc;
+      this.buyable = nb;
     }
   }
 
@@ -122,8 +122,8 @@ export class ProductComponent implements OnInit {
     let { cout, croissance, quantite } = this.product;
     let totalQuantity = quantity + quantite;
     let cost =
-      cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance));
-    if (cost < this.money) {
+      cout * ((1 - Math.pow(croissance, quantity)) / (1 - croissance));
+    if (cost <= this.money) {
       this.product.quantite = totalQuantity;
       this.notifyProductBuy.emit(cost);
       this.service.putProduct(this.product);
