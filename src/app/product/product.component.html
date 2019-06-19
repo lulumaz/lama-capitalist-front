@@ -9,8 +9,15 @@
       />
     </div>
     <div class="col-sm-8 container">
-      <div class="row">
-        {{product.name}}
+      <div class="row title">
+
+            <div class="col">
+                {{product.name}} 
+            </div>
+            <div class="col level">
+                Level:{{product.quantite}}
+            </div>
+        
       </div>
       <!-- progress bar-->
       <div class="row">
@@ -36,6 +43,9 @@
               <div class="col-sm-3">Cryptolama</div>
             </div>
         </div>
+      </div>
+      <div class="row">
+        Grace {{product.name}} vous rapportera {{product.revenu}} Cryptolamas
       </div>
     </div>
   </div>
