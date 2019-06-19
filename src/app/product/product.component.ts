@@ -17,9 +17,11 @@ const ProgressBar = require("progressbar.js");
   selector: "app-product",
   templateUrl: "./product.component.html",
   styleUrls: ["./product.component.css"]
-  
 })
 export class ProductComponent implements OnInit {
+  //todo : ne pas pouvoir lancer la production si on a pas le lama
+  //todo : handle le Nan cryptolama
+
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<
     Product
   >();
@@ -70,9 +72,10 @@ export class ProductComponent implements OnInit {
       this.product.timeleft = this.product.vitesse;
       this.lastupdate = Date.now();
       this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
-
-      this.service.putProduct(this.product);
       this.working = true;
+      if (!this.product.managerUnlocked) {
+        this.service.putProduct(this.product);
+      }
     }
   }
 
@@ -108,6 +111,10 @@ export class ProductComponent implements OnInit {
       // on prévient le composant parent que ce produit a généré son revenu.
       this.notifyProduction.emit(this.product);
       this.working = false;
+    } else {
+      if (this.product.managerUnlocked) {
+        this.startFabrication();
+      }
     }
   }
 

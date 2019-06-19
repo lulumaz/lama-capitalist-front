@@ -8,16 +8,17 @@ import { World, Product, Pallier } from "./word";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-
   world: World = new World();
   server: string;
   mult: string[] = ["1", "10", "100", "Max"];
   multSelected: string = this.mult[0];
+  username: string = "";
 
   constructor(private service: RestserviceService) {
     this.server = service.getServer();
     service.getWorld().then(world => {
       this.world = world;
+      console.log(world);
     });
   }
 
@@ -37,5 +38,21 @@ export class AppComponent {
 
   onProductBuy(cost: number) {
     this.world.money = this.world.money - cost;
+  }
+  onUsernameChanged(username: string) {
+    this.service.setUser(username);
+    this.service.getWorld().then(world => {
+      this.world = world;
+      console.log(world);
+    });
+  }
+
+  onBuyManager(manager: Pallier) {
+    if (manager.seuil <= this.world.money) {
+      manager.unlocked = true;
+      this.service.putManager(manager);
+      this.world.money -= manager.seuil;
+      this.world.products.product[manager.idcible].managerUnlocked = true;
+    }
   }
 }

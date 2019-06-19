@@ -16,6 +16,10 @@ export class RestserviceService {
     return Promise.reject(error.message || error);
   }
 
+  setUser(username: string) {
+    this.user = username;
+  }
+
   private setHeaders(
     user: string
   ): {
