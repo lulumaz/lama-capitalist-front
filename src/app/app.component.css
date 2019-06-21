@@ -19,13 +19,13 @@
   padding: 4px 8px;
 }
 .titleR{
-  background: -webkit-linear-gradient(to left, #f8b500, #fceabb); 
-  background: linear-gradient(to left, #f8b500, #fceabb);
+  background: -webkit-linear-gradient(to right, #f8b500, #fceabb); 
+  background: linear-gradient(to right, #f8b500, #fceabb);
 }
 
 .items{
-  background: -webkit-linear-gradient(to left, #f8b500, #fceabb); 
-  background: linear-gradient(to left, #f8b500, #fceabb); 
+  background: -webkit-linear-gradient(to right, #f8b500, #fceabb); 
+  background: linear-gradient(to right, #f8b500, #fceabb); 
 }
 a{
   font-family: Gill Sans, Verdana;
