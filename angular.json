@@ -23,9 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "styles.css", "node_modules/angular2-toaster/toaster.css"
             ],
-            "scripts": ["node_modules/progressbar.js/dist/progressbar.js"],
+            "scrspts": ["node_modules/progressbar.js/dist/progressbar.js"],
             "es5BrowserSupport": true
           },
           "configurations": {
