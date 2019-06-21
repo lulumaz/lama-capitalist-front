@@ -19,7 +19,6 @@ const ProgressBar = require("progressbar.js");
   styleUrls: ["./product.component.css"]
 })
 export class ProductComponent implements OnInit {
-
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<
     Product
   >();
@@ -47,7 +46,7 @@ export class ProductComponent implements OnInit {
   lastupdate: number;
   working = false;
   buyable: number;
-  cost:number=0;
+  cost: number = 0;
 
   set prod(value: Product) {
     this.product = value;
@@ -68,7 +67,7 @@ export class ProductComponent implements OnInit {
     }, 100);
   }
   startFabrication() {
-    if (this.working == false && this.product.quantite>0) {
+    if (this.working == false && this.product.quantite > 0) {
       this.product.timeleft = this.product.vitesse;
       this.lastupdate = Date.now();
       this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
@@ -80,15 +79,13 @@ export class ProductComponent implements OnInit {
   }
 
   calcMaxCanBuy() {
-    //todo revoir la formule
-    let calc = Math.floor(
+    let calc =
       Math.log(
         1 +
-         ( (this.product.croissance * this.money - this.money) /
-            this.product.cout )
-      ) / Math.log(this.product.croissance)
-    );
-    let nb = Math.trunc(calc);
+          (this.product.croissance * this.money - this.money) /
+            this.product.cout
+      ) / Math.log(this.product.croissance);
+    let nb = Math.floor(calc);
     if (this._multSelected != "Max") {
       let x = parseInt(this._multSelected);
       if (nb > x) {
@@ -99,12 +96,22 @@ export class ProductComponent implements OnInit {
     } else {
       this.buyable = nb;
     }
+    if (this.buyable < 0) {
+      this.buyable = 0;
+    }
     let { cout, croissance, quantite } = this.product;
     let totalQuantity = this.buyable + quantite;
     this.cost =
-      cout * ((1 - Math.pow(croissance, this.buyable)) / (1 - croissance));
+      cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance)) -
+      cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance));
 
-
+    while (this.cost > this.money) {
+      this.buyable -= 1;
+      let totalQuantity = this.buyable + quantite;
+      this.cost =
+        cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance)) -
+        cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance));
+    }
   }
 
   calcScore() {
@@ -129,7 +136,8 @@ export class ProductComponent implements OnInit {
     let { cout, croissance, quantite } = this.product;
     let totalQuantity = quantity + quantite;
     let cost =
-      cout * ((1 - Math.pow(croissance, quantity)) / (1 - croissance));
+      cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance)) -
+      cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance));
     if (cost <= this.money) {
       this.product.quantite = totalQuantity;
       this.notifyProductBuy.emit(cost);
