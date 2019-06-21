@@ -33,17 +33,12 @@
             Acheter pour {{ this.cost <= 0 ? "X" : (this.cost | bigvalue) }}
           </button>
         </div>
-
         <div class="col-sm-3">{{ buyable }} lama disponible</div>
         <div class="col-sm-3">Cryptolama</div>
       </div>
       <div class="row">
         {{ product.name }} vous rapportera
-        {{
-          product.quantite == 0
-            ? product.revenu
-            : product.revenu * product.quantite
-        }}
+        {{ generatedMoney | bigvalue }}
         Cryptolamas en {{ product.vitesse / 1000 }} secondes
       </div>
     </div>

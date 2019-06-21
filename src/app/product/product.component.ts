@@ -46,6 +46,7 @@ export class ProductComponent implements OnInit {
   progressbar: any;
   progress = 0.5;
 
+  generatedMoney: number;
   progressbarPallier: any;
   progressPallier = 0.5;
 
@@ -92,13 +93,14 @@ export class ProductComponent implements OnInit {
   }
 
   calcMaxCanBuy() {
+    //calcul du nombre de produit qui peut être acheté
     let calc =
       Math.log(
         1 +
           (this.product.croissance * this.money - this.money) /
             this.product.cout
       ) / Math.log(this.product.croissance);
-    let nb = Math.floor(calc);
+    let nb = Math.floor(calc); //arrondi au plus bas
     if (this._multSelected != "Max") {
       let x = parseInt(this._multSelected);
       if (nb > x) {
@@ -112,20 +114,19 @@ export class ProductComponent implements OnInit {
     if (this.buyable < 0) {
       this.buyable = 0;
     }
-    let { cout, croissance, quantite } = this.product;
-    let totalQuantity = this.buyable + quantite;
-    this.cost =
-      cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance)) -
-      cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance));
-
+    //une fois le nombre d'article que l'on peut acheté est calculer on calcul le coût de l'achat
+    this.cost = this.calcCost();
     while (this.cost > this.money) {
+      //fix : dans certain cas la forule donne un nombre d'article achetable trop grand, on reduit donc le nombre d'article achetable jusqu'à avoir un coût cohérant.
       this.buyable -= 1;
-      let totalQuantity = this.buyable + quantite;
-      this.cost =
-        cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance)) -
-        cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance));
+      this.cost = this.calcCost();
     }
+
+    //Mise à jour de l'état du pallier
     this.calcPallierStep();
+
+    //mise à jour de l'affichage
+    this.calcGeneratedMoney();
   }
 
   calcScore() {
@@ -146,12 +147,36 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  onBuy(quantity: number) {
+  calcCost(): number {
     let { cout, croissance, quantite } = this.product;
-    let totalQuantity = quantity + quantite;
-    let cost =
+    let totalQuantity = this.buyable + quantite;
+    return (
       cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance)) -
-      cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance));
+      cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance))
+    );
+  }
+
+  calcGeneratedMoney(): number {
+    if (this.product.quantite == 0) {
+      this.generatedMoney = this.product.revenu;
+      return;
+    } else {
+      let win = this.product.quantite * this.product.revenu;
+      let finalWin = win;
+      for (const pallier of this.product.palliers.pallier) {
+        if (pallier.typeratio == "gain" && pallier.unlocked) {
+          finalWin += win * (pallier.ratio - 1);
+        }
+      }
+      this.generatedMoney = finalWin;
+      return;
+    }
+  }
+
+  onBuy(quantity: number) {
+    const { quantite } = this.product;
+    const totalQuantity = quantity + quantite;
+    const cost = this.calcCost();
     if (cost <= this.money) {
       this.product.quantite = totalQuantity;
       this.notifyProductBuy.emit(cost);
