@@ -18,7 +18,6 @@ export class AppComponent {
     this.server = service.getServer();
     service.getWorld().then(world => {
       this.world = world;
-      console.log(world);
     });
   }
 
@@ -43,7 +42,6 @@ export class AppComponent {
     this.service.setUser(username);
     this.service.getWorld().then(world => {
       this.world = world;
-      console.log(world);
     });
   }
 
