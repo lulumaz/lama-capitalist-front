@@ -8,9 +8,14 @@
         style="width:120px; height:120px;"
       />
     </div>
-    <div class="col-sm-8 container">
-      <div class="row">
-        {{product.name}}
+    <div class="col-sm-8">
+      <div class="row title">
+            <div class="col-sm-6">
+                {{product.name}} 
+            </div>
+            <div class="col-sm-6 level">
+                Level:{{product.quantite}}
+            </div>
       </div>
       <!-- progress bar-->
       <div class="row">
@@ -20,22 +25,15 @@
       </div>
       <!-- Ligne avec info achat-->
       <div class="row">
-        <div class="container" style="width: 100%">
-            <div class="row">
-              <div class="col-sm-3">
-                <button
-                  type="button"
-                  class="btn-gradient green small"
-                  (click)="onBuy(buyable)"
-                >
-                Acheter
-                </button>
+              <div class="col-sm-6">
+                  <button type="button" class="btn btn-dark">Acheter pour</button>
               </div>
-              <div class="col-sm-3"></div>
+
               <div class="col-sm-3">{{ buyable }} lama disponible</div>
               <div class="col-sm-3">Cryptolama</div>
-            </div>
-        </div>
+      </div>
+      <div class="row">
+        Grace {{product.name}} vous rapportera {{product.revenu}} Cryptolamas
       </div>
     </div>
   </div>
