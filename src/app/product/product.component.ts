@@ -28,6 +28,9 @@ export class ProductComponent implements OnInit {
   @ViewChild("bar")
   progressBarItem;
 
+  @ViewChild("barPallier")
+  progressBarItemPallier;
+
   @Input("prod")
   product: Product;
 
@@ -41,8 +44,12 @@ export class ProductComponent implements OnInit {
     if (this._multSelected && this.product) this.calcMaxCanBuy();
   }
   progressbar: any;
-  server: string;
   progress = 0.5;
+
+  progressbarPallier: any;
+  progressPallier = 0.5;
+
+  server: string;
   lastupdate: number;
   working = false;
   buyable: number;
@@ -59,12 +66,18 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
     this.progressbar = new ProgressBar.Line(
       this.progressBarItem.nativeElement,
+      { strokeWidth: 50, color: "#00ffff" }
+    );
+
+    this.progressbarPallier = new ProgressBar.Line(
+      this.progressBarItemPallier.nativeElement,
       { strokeWidth: 50, color: "#00ff00" }
     );
+
     setInterval(() => {
       this.calcScore();
       this.calcMaxCanBuy();
-    }, 100);
+    }, 200);
   }
   startFabrication() {
     if (this.working == false && this.product.quantite > 0) {
@@ -112,6 +125,7 @@ export class ProductComponent implements OnInit {
         cout * ((1 - Math.pow(croissance, totalQuantity)) / (1 - croissance)) -
         cout * ((1 - Math.pow(croissance, quantite)) / (1 - croissance));
     }
+    this.calcPallierStep();
   }
 
   calcScore() {
@@ -141,8 +155,26 @@ export class ProductComponent implements OnInit {
     if (cost <= this.money) {
       this.product.quantite = totalQuantity;
       this.notifyProductBuy.emit(cost);
+      this.calcPallierStep(); //setting if unlocked
       this.service.putProduct(this.product);
     }
     this.calcMaxCanBuy();
+  }
+
+  calcPallierStep() {
+    if (this.progressbarPallier) {
+      let buyed = this.product.quantite;
+      for (const pallier of this.product.palliers.pallier) {
+        if (!pallier.unlocked) {
+          if (buyed >= pallier.seuil) {
+            pallier.unlocked = true;
+          } else {
+            this.progressbarPallier.set(buyed / pallier.seuil);
+            return;
+          }
+        }
+      }
+      this.progressbarPallier.set(1);
+    }
   }
 }
