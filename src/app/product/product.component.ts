@@ -47,6 +47,7 @@ export class ProductComponent implements OnInit {
   lastupdate: number;
   working = false;
   buyable: number;
+  cost:number=0;
 
   set prod(value: Product) {
     this.product = value;
@@ -98,6 +99,12 @@ export class ProductComponent implements OnInit {
     } else {
       this.buyable = nb;
     }
+    let { cout, croissance, quantite } = this.product;
+    let totalQuantity = this.buyable + quantite;
+    this.cost =
+      cout * ((1 - Math.pow(croissance, this.buyable)) / (1 - croissance));
+
+
   }
 
   calcScore() {
