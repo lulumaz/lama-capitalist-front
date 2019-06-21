@@ -33,7 +33,7 @@
               <div class="col-sm-3">Cryptolama</div>
       </div>
       <div class="row">
-        {{product.name}} vous rapportera {{product.revenu}} Cryptolamas en {{product.vitesse/1000}} secondes
+        {{product.name}} vous rapportera {{(product.quantite==0)?(product.revenu):(product.revenu  * product.quantite)}} Cryptolamas en {{product.vitesse/1000}} secondes
       </div>
     </div>
   </div>
