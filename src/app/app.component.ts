@@ -22,8 +22,16 @@ export class AppComponent {
   }
 
   onProductionDone(p: Product) {
-    this.world.money += p.quantite * p.revenu;
-    this.world.score += p.quantite * p.revenu;
+    let win = p.quantite * p.revenu;
+    let finalWin = win;
+    for (const pallier of p.palliers.pallier) {
+      if (pallier.typeratio == "gain" && pallier.unlocked) {
+        finalWin += win * (pallier.ratio - 1);
+      }
+    }
+
+    this.world.money += finalWin;
+    this.world.score += finalWin;
   }
 
   onMultChange(actualMult: string) {
