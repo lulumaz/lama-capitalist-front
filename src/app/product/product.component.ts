@@ -55,6 +55,7 @@ export class ProductComponent implements OnInit {
   working = false;
   buyable: number;
   cost: number = 0;
+  bonusVitesse: number = 1;
 
   set prod(value: Product) {
     this.product = value;
@@ -82,9 +83,9 @@ export class ProductComponent implements OnInit {
   }
   startFabrication() {
     if (this.working == false && this.product.quantite > 0) {
-      this.product.timeleft = this.product.vitesse;
+      this.product.timeleft = this.product.vitesse / this.bonusVitesse;
       this.lastupdate = Date.now();
-      this.progressbar.animate(1, { duration: this.product.vitesse }); // complete the row
+      this.progressbar.animate(1, { duration: this.product.timeleft });
       this.working = true;
       if (!this.product.managerUnlocked) {
         this.service.putProduct(this.product);
@@ -127,6 +128,9 @@ export class ProductComponent implements OnInit {
 
     //mise à jour de l'affichage
     this.calcGeneratedMoney();
+
+    //mise à jour de la vitesse de création du produit en fonction des bonus
+    this.calcBonusVitesse();
   }
 
   calcScore() {
@@ -201,5 +205,15 @@ export class ProductComponent implements OnInit {
       }
       this.progressbarPallier.set(1);
     }
+  }
+
+  calcBonusVitesse() {
+    let bonusVitesse = 1;
+    for (const pallier of this.product.palliers.pallier) {
+      if (pallier.unlocked && pallier.typeratio == "vitesse") {
+        bonusVitesse = bonusVitesse * pallier.ratio;
+      }
+    }
+    this.bonusVitesse = bonusVitesse;
   }
 }
