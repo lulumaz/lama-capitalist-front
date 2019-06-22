@@ -54,7 +54,13 @@
           >Manager</a
         >
         <a class="nav-link" href="#">Ange</a>
-        <a class="nav-link" href="#">Cash Upgrades</a>
+        <a
+          class="nav-link"
+          href="#"
+          data-toggle="modal"
+          (click)="upgradeModal.show()"
+          >Cash Upgrades</a
+        >
         <a
           class="nav-link"
           href="#"
@@ -259,6 +265,66 @@
   </div>
   <div class="app-modal-footer">
     <button type="button" class="btn btn-default" (click)="pallierModal.hide()">
+      Close
+    </button>
+  </div>
+</app-modal>
+
+<app-modal #upgradeModal>
+  <div class="app-modal-header">
+    <h4 class="modal-title">
+      Par le pouvoir de la force (va falloir trouver quoi mettre là parce que
+      pour l'instant c'est pas ouf)
+    </h4>
+  </div>
+  <div class="app-modal-body">
+    <div *ngFor="let pallier of world.upgrades.pallier">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <img
+              [src]="server + pallier.logo"
+              alt=""
+              style="width:120px; height:120px;"
+            />
+          </div>
+          <div class="col-md-6">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  {{ pallier.name }} pour
+                  {{ world.products.product[pallier.idcible]?.name }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">{{ pallier.seuil }} cryptolama</div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  bonus de {{ pallier.typeratio }} de x{{
+                    pallier.ratio | bigvalue
+                  }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-success"
+              *ngIf="!pallier.unlocked"
+              (click)="onBuyUpgrade(pallier)"
+            >
+              Acheter
+            </button>
+            <div *ngIf="pallier.unlocked">Possédé</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="upgradeModal.hide()">
       Close
     </button>
   </div>

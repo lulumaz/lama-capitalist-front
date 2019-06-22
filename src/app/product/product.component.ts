@@ -6,7 +6,7 @@ import {
   Output,
   EventEmitter
 } from "@angular/core";
-import { Product } from "../word";
+import { Product, Pallier } from "../word";
 import { RestserviceService } from "../restservice.service";
 
 declare var require;
@@ -19,9 +19,10 @@ const ProgressBar = require("progressbar.js");
   styleUrls: ["./product.component.css"]
 })
 export class ProductComponent implements OnInit {
-  @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<
-    Product
-  >();
+  @Output() notifyProduction = new EventEmitter<{
+    product: Product;
+    upgrades: Pallier[];
+  }>();
 
   @Output() notifyProductBuy: EventEmitter<number> = new EventEmitter<number>();
 
@@ -56,6 +57,7 @@ export class ProductComponent implements OnInit {
   buyable: number;
   cost: number = 0;
   bonusVitesse: number = 1;
+  upgrades: Pallier[] = []; //contient tous les upgrades débloqué pour le produit
 
   set prod(value: Product) {
     this.product = value;
@@ -142,7 +144,10 @@ export class ProductComponent implements OnInit {
       this.progressbar.set(0);
       this.product.timeleft = 0;
       // on prévient le composant parent que ce produit a généré son revenu.
-      this.notifyProduction.emit(this.product);
+      this.notifyProduction.emit({
+        product: this.product,
+        upgrades: this.upgrades
+      });
       this.working = false;
     } else {
       if (this.product.managerUnlocked) {
@@ -170,6 +175,11 @@ export class ProductComponent implements OnInit {
       for (const pallier of this.product.palliers.pallier) {
         if (pallier.typeratio == "gain" && pallier.unlocked) {
           finalWin += win * (pallier.ratio - 1);
+        }
+      }
+      for (const upgrade of this.upgrades) {
+        if (upgrade.typeratio == "gain") {
+          finalWin += win * (upgrade.ratio - 1);
         }
       }
       this.generatedMoney = finalWin;
@@ -207,11 +217,27 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  public setUpgrade(palliers: Pallier[]) {
+    let bonus: Pallier[] = [];
+    for (const pallier of palliers) {
+      if (pallier.idcible == this.product.id && pallier.unlocked) {
+        bonus.push(pallier);
+      }
+    }
+    this.upgrades = bonus;
+    console.log({ name: this.product.name, upgrades: this.upgrades });
+  }
+
   calcBonusVitesse() {
     let bonusVitesse = 1;
     for (const pallier of this.product.palliers.pallier) {
       if (pallier.unlocked && pallier.typeratio == "vitesse") {
         bonusVitesse = bonusVitesse * pallier.ratio;
+      }
+    }
+    for (const upgrade of this.upgrades) {
+      if (upgrade.typeratio == "vitesse") {
+        bonusVitesse = bonusVitesse * upgrade.ratio;
       }
     }
     this.bonusVitesse = bonusVitesse;
