@@ -313,6 +313,7 @@
               type="button"
               class="btn btn-success"
               *ngIf="!pallier.unlocked"
+              [disabled]="world.money <= pallier.seuil"
               (click)="onBuyUpgrade(pallier)"
             >
               Acheter
