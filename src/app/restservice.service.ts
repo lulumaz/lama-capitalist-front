@@ -55,4 +55,12 @@ export class RestserviceService {
       })
       .toPromise();
   }
+
+  public putUpgrade(upgrade: Pallier): Promise<any> {
+    return this.http
+      .put(this.server + this.adeventureisis + "generic/upgrade", upgrade, {
+        headers: this.setHeaders(this.user)
+      })
+      .toPromise();
+  }
 }
