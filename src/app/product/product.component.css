@@ -14,12 +14,13 @@
  border: 1px solid indianred !important;   
 }
 .title{
-    font-size: medium;
+    font-size: medium;  
     font-family: Gill Sans, Verdana;
 }
 .level{
     text-align: right;
 }
+
 
 
 button {
