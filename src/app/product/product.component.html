@@ -1,4 +1,4 @@
-<div class="container-fluid" style="height: 125px;">
+<div class="container-fluid" style="height: 145px;">
   <div class="row">
     <div class="col-sm-4">
       <img
@@ -10,12 +10,10 @@
     </div>
     <div class="col-sm-8">
       <div class="row title">
-            <div class="col-sm-6">
-                {{product.name}}
-            </div>
-            <div class="col-sm-6 level">
-                Level:{{product.quantite}}
-            </div>
+        <div class="col-sm-6">
+          {{ product.name }}
+        </div>
+        <div class="col-sm-6 level">Level:{{ product.quantite }}</div>
       </div>
       <!-- progress bar-->
       <div class="row">
@@ -25,16 +23,29 @@
       </div>
       <!-- Ligne avec info achat-->
       <div class="row">
-              <div class="col-sm-6">
-                  <button type="button" class="btn btn-dark" (click)="onBuy(buyable)" [disabled]="(buyable<=0)">Acheter pour {{(this.cost<=0)?"X":(this.cost  | bigvalue)}}</button>
-              </div>
-
-              <div class="col-sm-3">{{ buyable }} lama disponible</div>
-              <div class="col-sm-3">Cryptolama</div>
+        <div class="col-sm-6">
+          <button
+            type="button"
+            class="btn btn-dark"
+            (click)="onBuy(buyable)"
+            [disabled]="buyable <= 0"
+          >
+            Acheter pour {{ this.cost <= 0 ? "X" : (this.cost | bigvalue) }}
+          </button>
+        </div>
+        <div class="col-sm-3">{{ buyable }} lama disponible</div>
+        <div class="col-sm-3">Cryptolama</div>
       </div>
       <div class="row">
-        {{product.name}} vous rapportera {{product.revenu}} Cryptolamas en {{product.vitesse/1000}} secondes
+        {{ product.name }} vous rapportera
+        {{ generatedMoney | bigvalue }}
+        Cryptolamas en {{ product.vitesse / bonusVitesse / 1000 }} secondes
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="progress" #barPallier style="width:120px;"></div>
     </div>
   </div>
 </div>

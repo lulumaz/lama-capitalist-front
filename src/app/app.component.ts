@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, ViewChildren, QueryList } from "@angular/core";
 import { RestserviceService } from "./restservice.service";
 import { World, Product, Pallier } from "./word";
+import { ProductComponent } from "./product/product.component";
 
 @Component({
   selector: "app-root",
@@ -13,17 +14,36 @@ export class AppComponent {
   mult: string[] = ["1", "10", "100", "Max"];
   multSelected: string = this.mult[0];
   username: string = "";
+  @ViewChildren(ProductComponent) productsComponent: QueryList<
+    ProductComponent
+  >;
 
   constructor(private service: RestserviceService) {
     this.server = service.getServer();
     service.getWorld().then(world => {
       this.world = world;
+      this.productsComponent.forEach(p =>
+        p.setUpgrade(this.world.upgrades.pallier)
+      );
     });
   }
 
-  onProductionDone(p: Product) {
-    this.world.money += p.quantite * p.revenu;
-    this.world.score += p.quantite * p.revenu;
+  onProductionDone(value: { product: Product; upgrades: Pallier[] }) {
+    let { product, upgrades } = value;
+    let win = product.quantite * product.revenu;
+    let finalWin = win;
+    for (const pallier of product.palliers.pallier) {
+      if (pallier.typeratio == "gain" && pallier.unlocked) {
+        finalWin += win * (pallier.ratio - 1);
+      }
+    }
+    for (const upgrade of upgrades) {
+      if (upgrade.typeratio == "gain") {
+        finalWin += win * (upgrade.ratio - 1);
+      }
+    }
+    this.world.money += finalWin;
+    this.world.score += finalWin;
   }
 
   onMultChange(actualMult: string) {
@@ -42,6 +62,9 @@ export class AppComponent {
     this.service.setUser(username);
     this.service.getWorld().then(world => {
       this.world = world;
+      this.productsComponent.forEach(p =>
+        p.setUpgrade(this.world.upgrades.pallier)
+      );
     });
   }
 
@@ -51,6 +74,16 @@ export class AppComponent {
       this.service.putManager(manager);
       this.world.money -= manager.seuil;
       this.world.products.product[manager.idcible].managerUnlocked = true;
+    }
+  }
+
+  onBuyUpgrade(upgrade: Pallier) {
+    if (upgrade.seuil <= this.world.money) {
+      this.world.money -= upgrade.seuil;
+      upgrade.unlocked = true;
+      this.productsComponent.forEach(p =>
+        p.setUpgrade(this.world.upgrades.pallier)
+      );
     }
   }
 }

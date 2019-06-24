@@ -54,14 +54,26 @@
           >Manager</a
         >
         <a class="nav-link" href="#">Ange</a>
-        <a class="nav-link" href="#">Pallier</a>
+        <a
+          class="nav-link"
+          href="#"
+          data-toggle="modal"
+          (click)="upgradeModal.show()"
+          >Cash Upgrades</a
+        >
+        <a
+          class="nav-link"
+          href="#"
+          data-toggle="modal"
+          (click)="pallierModal.show()"
+          >Pallier</a
+        >
       </div>
     </div>
     <div class="col-md-11">
-      
-        <div class="row">
-          <div class="col-md-6">      
-            <app-product
+      <div class="row">
+        <div class="col-md-6">
+          <app-product
             *ngIf="world.products.product[0]"
             [prod]="world.products.product[0]"
             class="product"
@@ -70,71 +82,68 @@
             [multSelected]="multSelected"
             [money]="world.money"
           ></app-product>
-          </div>
-          <div class="col-md-6">
-              <app-product
-              *ngIf="world.products.product[1]"
-              [prod]="world.products.product[1]"
-              class="product"
-              (notifyProduction)="onProductionDone($event)"
-              (notifyProductBuy)="onProductBuy($event)"
-              [multSelected]="multSelected"
-              [money]="world.money"
-            ></app-product>
-          </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <app-product
-                *ngIf="world.products.product[2]"
-                [prod]="world.products.product[2]"
-                class="product"
-                (notifyProduction)="onProductionDone($event)"
-                (notifyProductBuy)="onProductBuy($event)"
-                [multSelected]="multSelected"
-                [money]="world.money"
-              ></app-product>
-  
-            </div>
-            <div class="col-md-6">
-                <app-product
-                *ngIf="world.products.product[3]"
-                [prod]="world.products.product[3]"
-                class="product"
-                (notifyProduction)="onProductionDone($event)"
-                (notifyProductBuy)="onProductBuy($event)"
-                [multSelected]="multSelected"
-                [money]="world.money"
-              ></app-product>
-              
-            </div>
-          </div>
-          <div class="row">
-              <div class="col-md-6">
-                  <app-product
-                  *ngIf="world.products.product[4]"
-                  [prod]="world.products.product[4]"
-                  class="product"
-                  (notifyProduction)="onProductionDone($event)"
-                  (notifyProductBuy)="onProductBuy($event)"
-                  [multSelected]="multSelected"
-                  [money]="world.money"
-                ></app-product>
-    
-              </div>
-              <div class="col-md-6">
-                  <app-product
-                  *ngIf="world.products.product[5]"
-                  [prod]="world.products.product[5]"
-                  class="product"
-                  (notifyProduction)="onProductionDone($event)"
-                  (notifyProductBuy)="onProductBuy($event)"
-                  [multSelected]="multSelected"
-                  [money]="world.money"
-                ></app-product>
-              </div>
-            </div>
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[1]"
+            [prod]="world.products.product[1]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
       </div>
+      <div class="row">
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[2]"
+            [prod]="world.products.product[2]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[3]"
+            [prod]="world.products.product[3]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[4]"
+            [prod]="world.products.product[4]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[5]"
+            [prod]="world.products.product[5]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -195,4 +204,129 @@
   </div>
 </app-modal>
 
+<app-modal #pallierModal>
+  <div class="app-modal-header">
+    <h4 class="modal-title">Le chemin sera cool</h4>
+  </div>
+  <div class="app-modal-body">
+    <div class="container">
+      <div
+        class="row"
+        *ngFor="let product of world.products.product"
+        style="margin-bottom: 5px; background-color: silver;"
+      >
+        <div class="col">
+          <div class="row">
+            <div class="col-md-3">
+              {{ product.name }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <img
+                [src]="server + product.logo"
+                alt=""
+                style="width:120px; height:120px;"
+              />
+            </div>
+            <div class="col-md-9">
+              <div class="container">
+                <div
+                  class="row"
+                  *ngFor="let pallier of product.palliers.pallier"
+                  style="margin-bottom: 5px;"
+                >
+                  <div
+                    class="col"
+                    [style.background-color]="pallier.unlocked ? 'grey' : ''"
+                  >
+                    <div class="row">
+                      <div class="col-md-6">
+                        {{ pallier.name }}
+                      </div>
+                      <div class="col-md-6">
+                        dispo level {{ pallier.seuil | bigvalue }}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col" style="margin-left: 15px;">
+                        bonus de {{ pallier.typeratio }} de x{{
+                          pallier.ratio | bigvalue
+                        }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="pallierModal.hide()">
+      Close
+    </button>
+  </div>
+</app-modal>
 
+<app-modal #upgradeModal>
+  <div class="app-modal-header">
+    <h4 class="modal-title">
+      Par le pouvoir de la force (va falloir trouver quoi mettre là parce que
+      pour l'instant c'est pas ouf)
+    </h4>
+  </div>
+  <div class="app-modal-body">
+    <div *ngFor="let pallier of world.upgrades.pallier">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <img
+              [src]="server + pallier.logo"
+              alt=""
+              style="width:120px; height:120px;"
+            />
+          </div>
+          <div class="col-md-6">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  {{ pallier.name }} pour
+                  {{ world.products.product[pallier.idcible]?.name }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">{{ pallier.seuil }} cryptolama</div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  bonus de {{ pallier.typeratio }} de x{{
+                    pallier.ratio | bigvalue
+                  }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-success"
+              *ngIf="!pallier.unlocked"
+              (click)="onBuyUpgrade(pallier)"
+            >
+              Acheter
+            </button>
+            <div *ngIf="pallier.unlocked">Possédé</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="upgradeModal.hide()">
+      Close
+    </button>
+  </div>
+</app-modal>
