@@ -1,3 +1,9 @@
+<audio
+  *ngIf="server"
+  loop="true"
+  autoplay="true"
+  [attr.src]="server + 'music/jean-ferrat-la-montagne-paroles.mp3'"
+></audio>
 <div class="container snow">
   <div class="row">
     <div class="col-md-2">
@@ -16,7 +22,6 @@
   </div>
 </div>
 
-
 <div class="container-fluid">
   <div class="row titleR">
     <div class="col-md-4 ">
@@ -30,7 +35,11 @@
       />
     </div>
     <div class="col-md-4 crypto">
-      <span id="worldMoney">{{ world.money | bigvalue }} Cryptolama </span>
+      <span
+        id="worldMoney"
+        [innerHTML]="(world.money | bigvalue) + ' Cryptolamas '"
+        >{{ world.money | bigvalue }} Cryptolama
+      </span>
     </div>
     <div class="col-md-4">
       <div class="button_cont" style="text-align: center">
@@ -52,23 +61,26 @@
           href="#"
           data-toggle="modal"
           (click)="managersModal.show()"
-          >Manager</button
         >
+          Manager
+        </button>
 
         <button
           class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="upgradeModal.show()"
-          >Cash Upgrades</button
         >
+          Cash Upgrades
+        </button>
         <button
           class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="pallierModal.show()"
-          >Pallier</button
         >
+          Pallier
+        </button>
       </div>
     </div>
     <div class="col-md-10">
@@ -326,6 +338,7 @@
               type="button"
               class="btn btn-success"
               *ngIf="!pallier.unlocked"
+              [disabled]="world.money <= pallier.seuil"
               (click)="onBuyUpgrade(pallier)"
             >
               Acheter

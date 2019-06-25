@@ -225,7 +225,24 @@ export class ProductComponent implements OnInit {
       }
     }
     this.upgrades = bonus;
-    console.log({ name: this.product.name, upgrades: this.upgrades });
+  }
+
+  public newWorldEvent() {
+    setTimeout(() => {
+      //lors de l'appel de la fonction le produit n'est pas encore mit à jours par angular : fix rapide pour retarder l'opération
+      this.calcBonusVitesse();
+      this.lastupdate = Date.now();
+      if (this.product.timeleft > 0) {
+        console.log(this.product.name);
+        let total = this.product.vitesse / this.bonusVitesse;
+        let start = (total - this.product.timeleft) / total;
+        this.progressbar.set(start);
+        this.progressbar.animate(1, {
+          duration: this.product.timeleft
+        });
+        this.working = true;
+      }
+    }, 300);
   }
 
   calcBonusVitesse() {

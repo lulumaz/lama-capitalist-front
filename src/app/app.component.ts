@@ -25,6 +25,7 @@ export class AppComponent {
       this.productsComponent.forEach(p =>
         p.setUpgrade(this.world.upgrades.pallier)
       );
+      this.productsComponent.forEach(p => p.newWorldEvent());
     });
   }
 
@@ -65,6 +66,7 @@ export class AppComponent {
       this.productsComponent.forEach(p =>
         p.setUpgrade(this.world.upgrades.pallier)
       );
+      this.productsComponent.forEach(p => p.newWorldEvent());
     });
   }
 
@@ -84,8 +86,7 @@ export class AppComponent {
       this.productsComponent.forEach(p =>
         p.setUpgrade(this.world.upgrades.pallier)
       );
+      this.service.putUpgrade(upgrade);
     }
   }
-
-  
 }
