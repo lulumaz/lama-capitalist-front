@@ -16,6 +16,7 @@
   </div>
 </div>
 
+
 <div class="container-fluid">
   <div class="row titleR">
     <div class="col-md-4 ">
@@ -39,7 +40,7 @@
       <div class="button_cont" style="text-align: center">
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-success"
           (click)="onMultChange(multSelected)"
         >
           Acheter par {{ multSelected }}
@@ -48,33 +49,33 @@
     </div>
   </div>
   <div class="row items">
-    <div class="col-md-1">
+    <div class="col-md-2">
       <div class="navbar">
-        <a
-          class="nav-link"
+        <button
+          class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="managersModal.show()"
-          >Manager</a
+          >Manager</button
         >
-        <a class="nav-link" href="#">Ange</a>
-        <a
-          class="nav-link"
+
+        <button
+          class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="upgradeModal.show()"
-          >Cash Upgrades</a
+          >Cash Upgrades</button
         >
-        <a
-          class="nav-link"
+        <button
+          class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="pallierModal.show()"
-          >Pallier</a
+          >Pallier</button
         >
       </div>
     </div>
-    <div class="col-md-11">
+    <div class="col-md-10">
       <div class="row">
         <div class="col-md-6 ">
           <app-product
@@ -159,7 +160,10 @@
     </h4>
   </div>
   <div class="app-modal-body">
-    <div *ngFor="let manager of world.managers.pallier">
+    <div
+      *ngFor="let manager of world.managers.pallier"
+      style="margin-bottom: 13px;"
+    >
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -288,7 +292,10 @@
     </h4>
   </div>
   <div class="app-modal-body">
-    <div *ngFor="let pallier of world.upgrades.pallier">
+    <div
+      *ngFor="let pallier of world.upgrades.pallier"
+      style="margin-bottom: 13px;"
+    >
       <div class="container">
         <div class="row">
           <div class="col-md-3">
