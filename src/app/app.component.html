@@ -62,7 +62,7 @@
           data-toggle="modal"
           (click)="managersModal.show()"
         >
-          Manager
+          <span class="badge" *ngIf="hasNewManager">New</span>Manager
         </button>
 
         <button
@@ -71,7 +71,7 @@
           data-toggle="modal"
           (click)="upgradeModal.show()"
         >
-          Cash Upgrades
+          <span class="badge" *ngIf="hasNewUpgrade">New</span> Cash Upgrades
         </button>
         <button
           class="nav-link myButton"
