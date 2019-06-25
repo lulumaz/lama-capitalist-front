@@ -2,7 +2,7 @@ import { Component, ViewChildren, QueryList } from "@angular/core";
 import { RestserviceService } from "./restservice.service";
 import { World, Product, Pallier } from "./word";
 import { ProductComponent } from "./product/product.component";
-
+import { ToasterService } from "angular2-toaster";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -18,7 +18,10 @@ export class AppComponent {
     ProductComponent
   >;
 
-  constructor(private service: RestserviceService) {
+  constructor(
+    private service: RestserviceService,
+    private toasterService: ToasterService
+  ) {
     this.server = service.getServer();
     service.getWorld().then(world => {
       this.world = world;
@@ -76,6 +79,7 @@ export class AppComponent {
       this.service.putManager(manager);
       this.world.money -= manager.seuil;
       this.world.products.product[manager.idcible].managerUnlocked = true;
+      this.toasterService.pop("success", "Manager hired ! ", manager.name);
     }
   }
 
