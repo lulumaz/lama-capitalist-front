@@ -3,7 +3,7 @@ a{
   font-family: Gill Sans, Verdana;
   font-weight: 800;
   font-size: 1.3em;
-  color: black;
+  color: #18ab29;
   text-align: center;
 }
 
@@ -11,9 +11,10 @@ a{
   font-family: Gill Sans, Verdana;
   font-weight: 800;
   font-size: 1.3em;
-  color: #000000;
+  color: #18ab29;
   border: thick double;
 }
+
 
 
 .buttonNumber {
@@ -29,19 +30,27 @@ a{
 .crypto{
   text-align: center;
 }
-canvas{
-  position:absolute;top:0;left:0;
-  background-image: linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
-  background-image: -o-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
-  background-image: -moz-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
-  background-image: -webkit-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
-  background-image: -ms-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
-  
-  background-image: -webkit-gradient(
-      linear,
-      left bottom,
-      left top,
-      color-stop(0, rgb(105,173,212)),
-      color-stop(0.84, rgb(23,82,145))
-  );
+.myButton {
+	background-color:#44c767;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px;
+	border-radius:18px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:22px;
+	padding:25px 51px;
+  text-decoration:none;
+  width: 100%;
+  margin-bottom: 20px;
 }
+.myButton:hover {
+	background-color:#5cbf2a;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
