@@ -1,3 +1,9 @@
+<audio
+  *ngIf="server"
+  loop="true"
+  autoplay="true"
+  [attr.src]="server + 'music/jean-ferrat-la-montagne-paroles.mp3'"
+></audio>
 <div class="container snow">
   <div class="row">
     <div class="col-md-2">
@@ -15,7 +21,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="container-fluid">
   <div class="row titleR">
@@ -56,23 +61,26 @@
           href="#"
           data-toggle="modal"
           (click)="managersModal.show()"
-          >Manager</button
         >
+          Manager
+        </button>
 
         <button
           class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="upgradeModal.show()"
-          >Cash Upgrades</button
         >
+          Cash Upgrades
+        </button>
         <button
           class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="pallierModal.show()"
-          >Pallier</button
         >
+          Pallier
+        </button>
       </div>
     </div>
     <div class="col-md-10">
