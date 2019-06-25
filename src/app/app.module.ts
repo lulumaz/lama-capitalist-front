@@ -6,13 +6,19 @@ import { AppComponent } from "./app.component";
 import { ProductComponent } from "./product/product.component";
 import { HttpClientModule } from "@angular/common/http";
 import { BigvaluePipe } from "./bigvalue.pipe";
-import { ModalComponent } from './modal/modal.component';
-import { ToasterModule } from 'angular2-toaster';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ModalComponent } from "./modal/modal.component";
+import { ToasterModule, ToasterService } from "angular2-toaster";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [AppComponent, ProductComponent, BigvaluePipe, ModalComponent],
-  imports: [BrowserModule, HttpClientModule, FormsModule,ToasterModule,BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    ToasterModule.forRoot(),
+    BrowserAnimationsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
