@@ -18,7 +18,14 @@
     bottom: -10px;
 }
 
-
+body{
+    background:url("src/assets/images/fond.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
 
 /* <div class="lesdeux">
 <div class="lepremier">Contenu 1</div>

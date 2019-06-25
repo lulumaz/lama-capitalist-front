@@ -87,4 +87,6 @@ export class AppComponent {
       this.service.putUpgrade(upgrade);
     }
   }
+
+  
 }

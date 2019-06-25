@@ -6,7 +6,7 @@ import { World, Pallier, Product } from "./word";
   providedIn: "root"
 })
 export class RestserviceService {
-  server = "http://localhost:8080/";
+  server = "http://192.168.43.137:8080/";
   adeventureisis = "adventureisis/";
   user = "keligClone4";
 

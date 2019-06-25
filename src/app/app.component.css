@@ -1,37 +1,9 @@
-.title {
-  position: relative;
-  text-align: center;
-}
 
-.title::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  background: #a9c622;
-  height: 2px;
-  z-index: -1;
-}
-
-.title span {
-  background: #a9c622;
-  padding: 4px 8px;
-}
-.titleR{
-  background: -webkit-linear-gradient(to right, #f8b500, #fceabb); 
-  background: linear-gradient(to right, #f8b500, #fceabb);
-}
-
-.items{
-  background: -webkit-linear-gradient(to right, #f8b500, #fceabb); 
-  background: linear-gradient(to right, #f8b500, #fceabb); 
-}
 a{
   font-family: Gill Sans, Verdana;
   font-weight: 800;
   font-size: 1.3em;
-  color: #ffffff;
+  color: black;
   text-align: center;
 }
 
@@ -39,12 +11,8 @@ a{
   font-family: Gill Sans, Verdana;
   font-weight: 800;
   font-size: 1.3em;
-  color: #ffffff;
+  color: #000000;
   border: thick double;
-}
-
-.col-md-2{
-  background-color: mediumturquoise;
 }
 
 
@@ -60,4 +28,20 @@ a{
 
 .crypto{
   text-align: center;
+}
+canvas{
+  position:absolute;top:0;left:0;
+  background-image: linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+  background-image: -o-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+  background-image: -moz-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+  background-image: -webkit-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+  background-image: -ms-linear-gradient(bottom, rgb(105,173,212) 0%, rgb(23,82,145) 84%);
+  
+  background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, rgb(105,173,212)),
+      color-stop(0.84, rgb(23,82,145))
+  );
 }
