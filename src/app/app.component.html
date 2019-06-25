@@ -1,6 +1,3 @@
-
-
-
 <div class="container snow">
   <div class="row">
     <div class="col-md-2">
@@ -148,15 +145,20 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <app-modal #managersModal>
   <div class="app-modal-header">
-    <h4 class="modal-title">On mon dieu un nouveau lama c'est rajouter dans la tribu après avoir quitter la sienne. Il va contribuer à votre prospération</h4>
+    <h4 class="modal-title">
+      On mon dieu un nouveau lama c'est rajouter dans la tribu après avoir
+      quitter la sienne. Il va contribuer à votre prospération
+    </h4>
   </div>
   <div class="app-modal-body">
-    <div *ngFor="let manager of world.managers.pallier">
+    <div
+      *ngFor="let manager of world.managers.pallier"
+      style="margin-bottom: 13px;"
+    >
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -209,7 +211,10 @@
 
 <app-modal #pallierModal>
   <div class="app-modal-header">
-    <h4 class="modal-title">Monter la montagne avec des lamas n'est pas une route facile elle ce fait seulement à travers différents palliers</h4>
+    <h4 class="modal-title">
+      Monter la montagne avec des lamas n'est pas une route facile elle ce fait
+      seulement à travers différents palliers
+    </h4>
   </div>
   <div class="app-modal-body">
     <div class="container">
@@ -277,11 +282,15 @@
 <app-modal #upgradeModal>
   <div class="app-modal-header">
     <h4 class="modal-title">
-      Avec toute l'histoire qu'un lama rencontre dans ça vie, il fini par s'ameliorer 
+      Avec toute l'histoire qu'un lama rencontre dans ça vie, il fini par
+      s'ameliorer
     </h4>
   </div>
   <div class="app-modal-body">
-    <div *ngFor="let pallier of world.upgrades.pallier">
+    <div
+      *ngFor="let pallier of world.upgrades.pallier"
+      style="margin-bottom: 13px;"
+    >
       <div class="container">
         <div class="row">
           <div class="col-md-3">
