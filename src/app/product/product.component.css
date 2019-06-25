@@ -30,11 +30,6 @@
     text-align: right;
 }
 
-.progressBar{
-  margin-top: 4px;
-  position: fixed;
-}
-
 button {
   z-index: 1;
   position: relative;
