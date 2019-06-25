@@ -1,20 +1,357 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<audio
+  *ngIf="server"
+  loop="true"
+  autoplay="true"
+  [attr.src]="server + 'music/jean-ferrat-la-montagne-paroles.mp3'"
+></audio>
+<div class="container snow">
+  <div class="row">
+    <div class="col-md-2">
+      <img
+        width="150"
+        height="150"
+        alt="Lama Logo"
+        [attr.src]="server + world.logo"
+      />
+    </div>
+    <div class="col-md-10">
+      <h1 class="title">
+        <span>{{ world.name }}</span>
+      </h1>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<div class="container-fluid">
+  <div class="row titleR">
+    <div class="col-md-4 ">
+      <input
+        class="form-control"
+        placeholder="Username"
+        aria-label="Username"
+        type="text"
+        [(ngModel)]="username"
+        (change)="onUsernameChanged(username)"
+      />
+    </div>
+    <div class="col-md-4 crypto">
+      <span
+        id="worldMoney"
+        [innerHTML]="(world.money | bigvalue) + ' Cryptolamas '"
+        >{{ world.money | bigvalue }} Cryptolama
+      </span>
+    </div>
+    <div class="col-md-4">
+      <div class="button_cont" style="text-align: center">
+        <button
+          type="button"
+          class="btn btn-success"
+          (click)="onMultChange(multSelected)"
+        >
+          Acheter par {{ multSelected }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row items">
+    <div class="col-md-2">
+      <div class="navbar">
+        <button
+          class="nav-link myButton"
+          href="#"
+          data-toggle="modal"
+          (click)="managersModal.show()"
+        >
+          Manager
+        </button>
+
+        <button
+          class="nav-link myButton"
+          href="#"
+          data-toggle="modal"
+          (click)="upgradeModal.show()"
+        >
+          Cash Upgrades
+        </button>
+        <button
+          class="nav-link myButton"
+          href="#"
+          data-toggle="modal"
+          (click)="pallierModal.show()"
+        >
+          Pallier
+        </button>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-6 ">
+          <app-product
+            *ngIf="world.products.product[0]"
+            [prod]="world.products.product[0]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[1]"
+            [prod]="world.products.product[1]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[2]"
+            [prod]="world.products.product[2]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[3]"
+            [prod]="world.products.product[3]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[4]"
+            [prod]="world.products.product[4]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+        <div class="col-md-6">
+          <app-product
+            *ngIf="world.products.product[5]"
+            [prod]="world.products.product[5]"
+            class="product"
+            (notifyProduction)="onProductionDone($event)"
+            (notifyProductBuy)="onProductBuy($event)"
+            [multSelected]="multSelected"
+            [money]="world.money"
+          ></app-product>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-modal #managersModal>
+  <div class="app-modal-header">
+    <h4 class="modal-title">
+      On mon dieu un nouveau lama c'est rajouter dans la tribu après avoir
+      quitter la sienne. Il va contribuer à votre prospération
+    </h4>
+  </div>
+  <div class="app-modal-body">
+    <div
+      *ngFor="let manager of world.managers.pallier"
+      style="margin-bottom: 13px;"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <img
+              [src]="server + manager.logo"
+              alt=""
+              style="width:120px; height:120px;"
+            />
+          </div>
+          <div class="col-md-9">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  {{ manager.name }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">{{ manager.seuil }} Cryptolama</div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <button
+                    *ngIf="!manager.unlocked"
+                    [disabled]="world.money < manager.seuil"
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="onBuyManager(manager)"
+                  >
+                    Hire
+                  </button>
+                  <div *ngIf="manager.unlocked">UnLocked !</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button
+      type="button"
+      class="btn btn-default"
+      (click)="managersModal.hide()"
+    >
+      Close
+    </button>
+  </div>
+</app-modal>
+
+<app-modal #pallierModal>
+  <div class="app-modal-header">
+    <h4 class="modal-title">
+      Monter la montagne avec des lamas n'est pas une route facile elle ce fait
+      seulement à travers différents palliers
+    </h4>
+  </div>
+  <div class="app-modal-body">
+    <div class="container">
+      <div
+        class="row"
+        *ngFor="let product of world.products.product"
+        style="margin-bottom: 5px; background-color: silver;"
+      >
+        <div class="col">
+          <div class="row">
+            <div class="col-md-3">
+              {{ product.name }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <img
+                [src]="server + product.logo"
+                alt=""
+                style="width:120px; height:120px;"
+              />
+            </div>
+            <div class="col-md-9">
+              <div class="container">
+                <div
+                  class="row"
+                  *ngFor="let pallier of product.palliers.pallier"
+                  style="margin-bottom: 5px;"
+                >
+                  <div
+                    class="col"
+                    [style.background-color]="pallier.unlocked ? 'grey' : ''"
+                  >
+                    <div class="row">
+                      <div class="col-md-6">
+                        {{ pallier.name }}
+                      </div>
+                      <div class="col-md-6">
+                        dispo level {{ pallier.seuil | bigvalue }}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col" style="margin-left: 15px;">
+                        bonus de {{ pallier.typeratio }} de x{{
+                          pallier.ratio | bigvalue
+                        }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="pallierModal.hide()">
+      Close
+    </button>
+  </div>
+</app-modal>
+
+<app-modal #upgradeModal>
+  <div class="app-modal-header">
+    <h4 class="modal-title">
+      Avec toute l'histoire qu'un lama rencontre dans ça vie, il fini par
+      s'ameliorer
+    </h4>
+  </div>
+  <div class="app-modal-body">
+    <div
+      *ngFor="let pallier of world.upgrades.pallier"
+      style="margin-bottom: 13px;"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <img
+              [src]="server + pallier.logo"
+              alt=""
+              style="width:120px; height:120px;"
+            />
+          </div>
+          <div class="col-md-6">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  {{ pallier.name }} pour
+                  {{ world.products.product[pallier.idcible]?.name }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">{{ pallier.seuil }} cryptolama</div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  bonus de {{ pallier.typeratio }} de x{{
+                    pallier.ratio | bigvalue
+                  }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <button
+              type="button"
+              class="btn btn-success"
+              *ngIf="!pallier.unlocked"
+              [disabled]="world.money <= pallier.seuil"
+              (click)="onBuyUpgrade(pallier)"
+            >
+              Acheter
+            </button>
+            <div *ngIf="pallier.unlocked">Possédé</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="upgradeModal.hide()">
+      Close
+    </button>
+  </div>
+</app-modal>
