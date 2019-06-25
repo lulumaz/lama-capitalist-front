@@ -2,18 +2,17 @@
 
 
 <div class="container snow">
-  <div class="row">
-    <div class="col-md-2">
-      <img
-        width="150"
-        height="150"
-        alt="Lama Logo"
-        [attr.src]="server + world.logo"
-      />
-    </div>
-    <div class="col-md-10">
+  <div class="row titlerow">
+
+    <div class="col-md-12">
       <h1 class="title">
-        <span>{{ world.name }}</span>
+          
+
+<div class="plate">
+    <p class="shadow text1">{{ world.name}}</p>
+  </div>
+  
+        <span></span>
       </h1>
     </div>
   </div>
@@ -33,7 +32,7 @@
       />
     </div>
     <div class="col-md-4 crypto">
-      <span id="worldMoney">{{ world.money | bigvalue }} Cryptolama </span>
+      <span id="worldMoney" style="color: black">{{ world.money | bigvalue }} Cryptolama </span>
     </div>
     <div class="col-md-4">
       <div class="button_cont" style="text-align: center">

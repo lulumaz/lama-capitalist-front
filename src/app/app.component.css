@@ -1,4 +1,28 @@
 
+@import url(https://fonts.googleapis.com/css?family=Seaweed+Script);
+body {
+  background-color: #222;
+}
+
+.shadow {
+  color: #18ab29;
+  font-family: Arvo;
+  font-weight: bold;
+  line-height: 0.8em;
+  transform: scaleY(0.7);
+  -webkit-transform: scaleY(0.7);
+  -moz-transform: scaleY(0.7);
+  margin:0;
+  text-align: center;
+}
+.text1 {
+  font-size: 95px;
+}
+.titlerow{
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
 a{
   font-family: Gill Sans, Verdana;
   font-weight: 800;
@@ -14,8 +38,6 @@ a{
   color: #18ab29;
   border: thick double;
 }
-
-
 
 .buttonNumber {
   color: #2ecc71 !important;
