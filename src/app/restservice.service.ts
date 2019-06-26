@@ -6,7 +6,7 @@ import { World, Pallier, Product } from "./word";
   providedIn: "root"
 })
 export class RestserviceService {
-  server = "http://192.168.43.137:8080/";
+  server = "http://localhost:8080/";
   adeventureisis = "adventureisis/";
   user = "keligClone4";
 
@@ -51,6 +51,14 @@ export class RestserviceService {
   public putProduct(product: Product): Promise<any> {
     return this.http
       .put(this.server + this.adeventureisis + "generic/product", product, {
+        headers: this.setHeaders(this.user)
+      })
+      .toPromise();
+  }
+
+  public putUpgrade(upgrade: Pallier): Promise<any> {
+    return this.http
+      .put(this.server + this.adeventureisis + "generic/upgrade", upgrade, {
         headers: this.setHeaders(this.user)
       })
       .toPromise();

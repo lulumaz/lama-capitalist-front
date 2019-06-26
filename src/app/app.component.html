@@ -1,6 +1,9 @@
-
-
-
+<audio
+  *ngIf="server"
+  loop="true"
+  autoplay="true"
+  [attr.src]="server + 'music/jean-ferrat-la-montagne-paroles.mp3'"
+></audio>
 <div class="container snow">
   <div class="row titlerow">
 
@@ -18,7 +21,6 @@
   </div>
 </div>
 
-
 <div class="container-fluid">
   <div class="row titleR">
     <div class="col-md-4 ">
@@ -32,7 +34,11 @@
       />
     </div>
     <div class="col-md-4 crypto">
-      <span id="worldMoney" style="color: black">{{ world.money | bigvalue }} Cryptolama </span>
+      <span
+        id="worldMoney"
+        [innerHTML]="(world.money | bigvalue) + ' Cryptolamas '"
+        >{{ world.money | bigvalue }} Cryptolama
+      </span>
     </div>
     <div class="col-md-4">
       <div class="button_cont" style="text-align: center">
@@ -54,23 +60,26 @@
           href="#"
           data-toggle="modal"
           (click)="managersModal.show()"
-          >Manager</button
         >
+          Manager
+        </button>
 
         <button
           class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="upgradeModal.show()"
-          >Cash Upgrades</button
         >
+          Cash Upgrades
+        </button>
         <button
           class="nav-link myButton"
           href="#"
           data-toggle="modal"
           (click)="pallierModal.show()"
-          >Pallier</button
         >
+          Pallier
+        </button>
       </div>
     </div>
     <div class="col-md-10">
@@ -148,15 +157,20 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <app-modal #managersModal>
   <div class="app-modal-header">
-    <h4 class="modal-title">On mon dieu un nouveau lama c'est rajouter dans la tribu après avoir quitter la sienne. Il va contribuer à votre prospération</h4>
+    <h4 class="modal-title">
+      On mon dieu un nouveau lama c'est rajouter dans la tribu après avoir
+      quitter la sienne. Il va contribuer à votre prospération
+    </h4>
   </div>
   <div class="app-modal-body">
-    <div *ngFor="let manager of world.managers.pallier">
+    <div
+      *ngFor="let manager of world.managers.pallier"
+      style="margin-bottom: 13px;"
+    >
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -209,7 +223,10 @@
 
 <app-modal #pallierModal>
   <div class="app-modal-header">
-    <h4 class="modal-title">Monter la montagne avec des lamas n'est pas une route facile elle ce fait seulement à travers différents palliers</h4>
+    <h4 class="modal-title">
+      Monter la montagne avec des lamas n'est pas une route facile elle ce fait
+      seulement à travers différents palliers
+    </h4>
   </div>
   <div class="app-modal-body">
     <div class="container">
@@ -277,11 +294,15 @@
 <app-modal #upgradeModal>
   <div class="app-modal-header">
     <h4 class="modal-title">
-      Avec toute l'histoire qu'un lama rencontre dans ça vie, il fini par s'ameliorer 
+      Avec toute l'histoire qu'un lama rencontre dans ça vie, il fini par
+      s'ameliorer
     </h4>
   </div>
   <div class="app-modal-body">
-    <div *ngFor="let pallier of world.upgrades.pallier">
+    <div
+      *ngFor="let pallier of world.upgrades.pallier"
+      style="margin-bottom: 13px;"
+    >
       <div class="container">
         <div class="row">
           <div class="col-md-3">
@@ -316,6 +337,7 @@
               type="button"
               class="btn btn-success"
               *ngIf="!pallier.unlocked"
+              [disabled]="world.money <= pallier.seuil"
               (click)="onBuyUpgrade(pallier)"
             >
               Acheter
