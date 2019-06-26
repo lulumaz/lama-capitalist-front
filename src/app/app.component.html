@@ -6,15 +6,12 @@
 ></audio>
 <div class="container snow">
   <div class="row titlerow">
-
     <div class="col-md-12">
       <h1 class="title">
-          
+        <div class="plate">
+          <p class="shadow text1">{{ world.name }}</p>
+        </div>
 
-<div class="plate">
-    <p class="shadow text1">{{ world.name}}</p>
-  </div>
-  
         <span></span>
       </h1>
     </div>
@@ -61,7 +58,7 @@
           data-toggle="modal"
           (click)="managersModal.show()"
         >
-          <span class="badge" *ngIf="hasNewManager">New</span>Manager
+          <span class="badge" *ngIf="hasNewManager">New</span>Managers
         </button>
 
         <button
@@ -78,7 +75,7 @@
           data-toggle="modal"
           (click)="pallierModal.show()"
         >
-          Pallier
+          Palliers
         </button>
       </div>
     </div>
