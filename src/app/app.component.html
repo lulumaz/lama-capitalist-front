@@ -5,18 +5,14 @@
   [attr.src]="server + 'music/jean-ferrat-la-montagne-paroles.mp3'"
 ></audio>
 <div class="container snow">
-  <div class="row">
-    <div class="col-md-2">
-      <img
-        width="150"
-        height="150"
-        alt="Lama Logo"
-        [attr.src]="server + world.logo"
-      />
-    </div>
-    <div class="col-md-10">
+  <div class="row titlerow">
+    <div class="col-md-12">
       <h1 class="title">
-        <span>{{ world.name }}</span>
+        <div class="plate">
+          <p class="shadow text1">{{ world.name }}</p>
+        </div>
+
+        <span></span>
       </h1>
     </div>
   </div>
@@ -62,7 +58,7 @@
           data-toggle="modal"
           (click)="managersModal.show()"
         >
-          Manager
+          <span class="badge" *ngIf="hasNewManager">New</span>Managers
         </button>
 
         <button
@@ -71,7 +67,7 @@
           data-toggle="modal"
           (click)="upgradeModal.show()"
         >
-          Cash Upgrades
+          <span class="badge" *ngIf="hasNewUpgrade">New</span> Cash Upgrades
         </button>
         <button
           class="nav-link myButton"
@@ -79,7 +75,7 @@
           data-toggle="modal"
           (click)="pallierModal.show()"
         >
-          Pallier
+          Palliers
         </button>
       </div>
     </div>
@@ -355,3 +351,4 @@
     </button>
   </div>
 </app-modal>
+<toaster-container></toaster-container>
